@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Group extends Model
+{
+    protected $table = 'groups';
+
+    protected $fillable = [
+        'name',
+    ];
+
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
+}

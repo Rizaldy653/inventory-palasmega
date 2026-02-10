@@ -53,7 +53,7 @@ class ItemResource extends Resource
                 Select::make('status')
                     ->options([
                         'good' => 'Good',
-                        'need_repaiar' => 'Need Repaiar',
+                        'need_repair' => 'Need Repaiar',
                         'broken' => 'Broken',
                 ])->required(),
                 Select::make('is_active')

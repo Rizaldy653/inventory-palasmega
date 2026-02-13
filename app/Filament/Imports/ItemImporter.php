@@ -50,12 +50,16 @@ class ItemImporter extends Importer
 
     public function resolveRecord(): ?Item
     {
-        // return Item::firstOrNew([
-        //     // Update existing records, matching them by `$this->data['column_name']`
-        //     'email' => $this->data['email'],
-        // ]);
+        $this->data['code'] = strtoupper(trim($this->data['code']));
 
-        return new Item();
+        $this->data['is_active'] = filter_var(
+            $this->data['is_active'],
+            FILTER_VALIDATE_BOOLEAN
+        );
+
+        return Item::firstOrNew([
+            'code' => $this->data['code'],
+        ]);
     }
 
     public static function getCompletedNotificationBody(Import $import): string

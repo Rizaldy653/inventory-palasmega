@@ -75,18 +75,25 @@ class ItemResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('code')->searchable(),    
-                TextColumn::make('name')->searchable(),    
+                TextColumn::make('code')
+                    ->label('name')
+                    ->searchable(),    
+                TextColumn::make('name')
+                    ->label('code')
+                    ->searchable(),    
                 TextColumn::make('type')->searchable(),    
                 TextColumn::make('brand')->searchable(),
                 TextColumn::make('color'),
-                TextColumn::make('load'),
-                TextColumn::make('unit'),
+                TextColumn::make('load')
+                    ->formatStateUsing(fn ($state, $record) => $state . '' . $record->unit),
                 TextColumn::make('added_at')->searchable(),
                 TextColumn::make('category.name'),
                 TextColumn::make('status'),
                 TextColumn::make('is_active')
-                    ->formatStateUsing(fn ($state) => $state ? 'Active' : 'Inactive'),
+                    ->formatStateUsing(fn ($state) => $state ? 'Active' : 'Inactive')
+                    ->color(fn ($state) => $state ? 'success' : 'gray')
+                    ->icon(fn ($state) => $state ? 'heroicon-o-check-circle' : 'heroicon-o-x-circle')
+                    ->searchable(),
                 TextColumn::make('groups.name')
                     ->label('Group')
                     ->listWithLineBreaks(),

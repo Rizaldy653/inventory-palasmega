@@ -111,6 +111,12 @@ class ItemResource extends Resource
                 SelectFilter::make('groups')
                     ->label('Group')
                     ->relationship('groups', 'name'),
+                SelectFilter::make('status')
+                    ->options([
+                        'good' => 'Good',
+                        'need_repair' => 'Need Repaiar',
+                        'broken' => 'Broken',
+                ])
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
